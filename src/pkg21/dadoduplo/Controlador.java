@@ -8,6 +8,7 @@ package pkg21.dadoduplo;
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.Proxy;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 
@@ -127,12 +128,15 @@ public class Controlador{
             int numDito = lance.getNumDito();
             int numReal = lance.getNumReal();
             boolean aceita = lance.isAceita();
+            String msg = lance.getMsg();
+            
             switch(bitControl){
                 
                 case 1:
                     defesaUI.setTela(numDito);
                     defesaUI.setNumDito(numDito);
                     defesaUI.setNumReal(numReal);
+                    defesaUI.setMsg(msg);
                     defesaEhVez = true;
                     ataqueEhVez = false;
                 break;
@@ -148,7 +152,7 @@ public class Controlador{
                        
                         
 //                        Player playerDef = defesaUI.getPlayer();
-                        enviarAtaque(new Lance(0, mesa.getNumAtual(), 0,  3, false));
+                        enviarAtaque(new Lance(0, mesa.getNumAtual(), 0,  3, false, ""));
                        
                         ataqueUI.dispose();
 //                        defesaUI.dispose();
@@ -180,7 +184,7 @@ public class Controlador{
                             }
                         }
                         
-                        enviarLance(new Lance(mesa.getPlacar(0), mesa.getPlacar(1), 0, 4, false));
+                        enviarLance(new Lance(mesa.getPlacar(0), mesa.getPlacar(1), 0, 4, false, ""));
                         mesa.setNumAtual(0);
                         Player player = ataqueUI.getPlayer();
                         ataqueUI.dispose();
@@ -189,6 +193,7 @@ public class Controlador{
                         defesaUI.setPlayer(player);
                         defesaUI.setPlacar(mesa.getPlacar(0));
                         defesaUI.setNumAtual(0);
+                        verificaVitoria();
                         
                     }
                     
@@ -225,6 +230,7 @@ public class Controlador{
                     ataqueUI.setPlayer(player2);
                     ataqueUI.setPlacar(mesa.getPlacar(0));
                     ataqueUI.setNumAtual(0);
+                    verificaVitoria();
                     
                     
                 break;
@@ -288,5 +294,20 @@ public class Controlador{
 	public int girarDados() {
 		return mesa.girarDados();
 	}
+        
+        public void verificaVitoria(){
+            
+            if(mesa.getPlacar(0) >= 5){
+                JOptionPane.showMessageDialog(null, "Player venceu!");
+                //reinicair jogo
+                System.exit(0);
+            }
+            if(mesa.getPlacar(1) >= 5){
+                JOptionPane.showMessageDialog(null, "Adversário venceu!");
+                //reinicair jogo
+                System.exit(0);
+            }
+            
+        }
 
 }

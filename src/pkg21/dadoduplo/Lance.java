@@ -14,6 +14,7 @@ public class Lance implements Jogada {
 	protected int numAtual;
         private int bitControle;
         private int numReal;
+        private String msg;
 
     public int getBitControle() {
         return bitControle;
@@ -25,13 +26,14 @@ public class Lance implements Jogada {
         private boolean aceita;
 //	private Mensagem mensagem;
         
-        public Lance(int numDeclarado, int numAtual, int numReal, int bit, boolean aceita){
+        public Lance(int numDeclarado, int numAtual, int numReal, int bit, boolean aceita, String msg){
             numDito =numDeclarado;
             this.numAtual = numAtual;
             this.bitControle = bit;
             this.aceita = aceita;
             this.numDito = numDeclarado;
             this.numReal = numReal;
+            this.msg= msg;
         }
 
 	public boolean verificarJogada() {
@@ -70,6 +72,14 @@ public class Lance implements Jogada {
 
     public void setNumReal(int numReal) {
         this.numReal = numReal;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
 

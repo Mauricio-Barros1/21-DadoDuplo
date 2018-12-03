@@ -53,6 +53,8 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,7 +73,7 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Recusar");
+        jButton2.setText("Duvidar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -83,6 +85,8 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
         jLabel8.setText("Nome:");
 
         jLabel9.setText("Posição");
+
+        jLabel10.setText("Oponente diz:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +106,7 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(49, 49, 49))))
             .addGroup(layout.createSequentialGroup()
@@ -113,13 +117,20 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 271, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +155,17 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(57, 57, 57))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,11 +176,11 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controlador.enviarDefesa(new Lance (this.numDito, controlador.getNumAtual(), numReal , 0, true));
+        controlador.enviarDefesa(new Lance (this.numDito, controlador.getNumAtual(), numReal , 0, true, ""));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controlador.enviarDefesa(new Lance(this.numDito, controlador.getNumAtual(), numReal, 0, false));
+        controlador.enviarDefesa(new Lance(this.numDito, controlador.getNumAtual(), numReal, 0, false, ""));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -215,7 +234,78 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
     
     public void setNumAtual(int num){
         this.numAtual = num;
-        jLabel4.setText("" + num);
+        
+        
+        switch(num){
+            
+            case 1:
+                jLabel4.setText("31");
+            break;
+            case 2:
+                jLabel4.setText("32");
+            break;
+            case 3:
+                jLabel4.setText("41");
+            break;
+            case 4:
+                jLabel4.setText("42");
+            break;
+            case 5:
+                jLabel4.setText("43");
+            break;
+            case 6:
+                jLabel4.setText("51");
+            break;
+            case 7:
+                jLabel4.setText("52");
+            break;
+            case 8:
+                jLabel4.setText("53");
+            break;
+            case 9:
+                jLabel4.setText("54");
+            break;
+            case 10:
+                jLabel4.setText("61");
+            break;
+            case 11:
+                jLabel4.setText("62");
+            break;
+            case 12:
+                jLabel4.setText("63");
+            break;
+            case 13:
+                jLabel4.setText("64");
+            break;
+            case 14:
+                jLabel4.setText("65");
+            break;
+            case 15:
+                jLabel4.setText("11");
+            break;
+            case 16:
+                jLabel4.setText("22");
+            break;
+            case 17:
+                jLabel4.setText("33");
+            break;
+            case 18:
+                jLabel4.setText("44");
+            break;
+            case 19:
+                jLabel4.setText("55");
+            break;
+            case 20:
+                jLabel4.setText("66");
+            break;
+            case 21:
+                jLabel4.setText("21");
+            break;
+            
+            
+            
+            
+        }
         
     }
     
@@ -358,6 +448,10 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
         this.numReal = numReal;
     }
     
+    public void setMsg(String msg){
+        jTextField1.setText(msg);
+    }
+    
     
 
         
@@ -368,6 +462,7 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -376,5 +471,6 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
