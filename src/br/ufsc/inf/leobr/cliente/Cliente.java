@@ -63,10 +63,10 @@ public final class Cliente {
 	public static final String HANDSHAKE_RPC_METHOD = "handshake";
 
 	/*
-	 * A localização desse arquivo de configuração é relativa ao diretorio root.
-	 * Quando o arquivo é localizado no root então o arquivo não tem prefixo de
-	 * pacote. Se o arquivo properties é localizado abaixo em um pacote então o
-	 * prefixo é seguido por /. ex: ufsc/inf/meuArquivo.properties
+	 * A localizacao desse arquivo de configuracao eh relativa ao diretorio root.
+	 * Quando o arquivo eh localizado no root entao o arquivo nao tem prefixo de
+	 * pacote. Se o arquivo properties eh localizado abaixo em um pacote entao o
+	 * prefixo eh seguido por /. ex: ufsc/inf/meuArquivo.properties
 	 */
 	public static final String DEFAULT_CONFIGURATION_FILE = "client.properties";
 
@@ -120,7 +120,7 @@ public final class Cliente {
 				configurationFile);
 		if (in == null) {
 			throw new IOException(
-					"Não é possível abrir o documento de configuração no classpath "
+					"Nï¿½o ï¿½ possï¿½vel abrir o documento de configuraï¿½ï¿½o no classpath "
 							+ configurationFile);
 		}
 		configurationProperties.load(in);
@@ -138,7 +138,7 @@ public final class Cliente {
 		if (!dir.exists()) {
 			if (!dir.mkdirs()) {
 				throw new IOException(
-						"Não é possível criar o diretório de log: " + logdir);
+						"Nï¿½o ï¿½ possï¿½vel criar o diretï¿½rio de log: " + logdir);
 			}
 		}
 
@@ -275,7 +275,7 @@ public final class Cliente {
 
 /**
  * Heartbeat periodicamente faz um ping no servidor handler para ajudar a
- * prevenir um proxy timeout por inatividade se a conexão é via HTTP ou socks
+ * prevenir um proxy timeout por inatividade se a conexï¿½o ï¿½ via HTTP ou socks
  * prxy
  */
 class HeartbeatThread extends Thread {

@@ -10,9 +10,29 @@ import br.ufsc.inf.leobr.cliente.Jogada;
 public class Lance implements Jogada {
     
     	protected int numDito;
-	protected boolean aceitaOUduvida;
+//	protected boolean aceitaOUduvida;
 	protected int numAtual;
+        private int bitControle;
+        private int numReal;
+
+    public int getBitControle() {
+        return bitControle;
+    }
+
+    public void setBitControle(int bitControle) {
+        this.bitControle = bitControle;
+    }
+        private boolean aceita;
 //	private Mensagem mensagem;
+        
+        public Lance(int numDeclarado, int numAtual, int numReal, int bit, boolean aceita){
+            numDito =numDeclarado;
+            this.numAtual = numAtual;
+            this.bitControle = bit;
+            this.aceita = aceita;
+            this.numDito = numDeclarado;
+            this.numReal = numReal;
+        }
 
 	public boolean verificarJogada() {
 		// TODO - implement Lance.verificarJogada
@@ -28,12 +48,12 @@ public class Lance implements Jogada {
         this.numDito = numDito;
     }
 
-    public boolean isAceitaOUduvida() {
-        return aceitaOUduvida;
+    public boolean isAceita() {
+        return aceita;
     }
 
-    public void setAceitaOUduvida(boolean aceitaOUduvida) {
-        this.aceitaOUduvida = aceitaOUduvida;
+    public void setAceita(boolean aceitaOUduvida) {
+        this.aceita = aceitaOUduvida;
     }
 
     public int getNumAtual() {
@@ -42,6 +62,14 @@ public class Lance implements Jogada {
 
     public void setNumAtual(int numAtual) {
         this.numAtual = numAtual;
+    }
+
+    public int getNumReal() {
+        return numReal;
+    }
+
+    public void setNumReal(int numReal) {
+        this.numReal = numReal;
     }
 
 

@@ -30,14 +30,20 @@ public class DadoDuploClass {
 		throw new UnsupportedOperationException();
 	}
 
-	public int[] giraDados() {
+	public int giraDados() {
 		// TODO - implement DadoDuplo.giraDados
-                int[] numerosGirados = new int[2];
-                Random gerador = new Random();
-                numerosGirados[0] = gerador.nextInt(6);
-		numerosGirados[1] = gerador.nextInt(6);
-                return numerosGirados;
-//                throw new UnsupportedOperationException();
+//                int[] numerosGirados = new int[2];
+//                Random gerador = new Random();
+//                numerosGirados[0] = gerador.nextInt(6);
+//		numerosGirados[1] = gerador.nextInt(6);
+//                return numerosGirados;
+
+            int numeroGirado;
+            Random gerador = new Random();
+            numeroGirado = (gerador.nextInt(21) + 1);
+            
+            return numeroGirado;
+
                 
 	}
 

@@ -13,6 +13,7 @@ import br.ufsc.inf.leobr.cliente.exception.JahConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoJogandoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoPossivelConectarException;
+import java.util.List;
 import javax.swing.JOptionPane;
 /**
  *
@@ -24,10 +25,23 @@ public class ControladorRede implements OuvidorProxy {
     public Controlador controlador;
     public boolean ehJogoRede = false;
     public boolean ehMinhaVez = false;
+    private IniciarPartidaUI jframeInicio;
+    ControladorRede rede;
+    
+    public Controlador getControlador(){
+        return this.controlador;
+    }
      
     public ControladorRede(Controlador controlador){
         super();//NECESSÁRIO?
         this.controlador = controlador;
+	proxy = Proxy.getInstance();
+	
+    }
+    public ControladorRede(Controlador controlador, ControladorRede rede){
+        super();//NECESSÁRIO?
+        this.controlador = controlador;
+        this.rede = rede;
 	proxy = Proxy.getInstance();
 	
     }
@@ -38,6 +52,8 @@ public class ControladorRede implements OuvidorProxy {
             Proxy.getInstance().conectar(ipServidor, nome);
 		//Adiciona o ator como um dos ouvintes do Proxy.
             Proxy.getInstance().addOuvinte(this);
+            JOptionPane.showMessageDialog(null, "Você está conectado!");
+            
 	} catch (JahConectadoException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -61,9 +77,13 @@ public class ControladorRede implements OuvidorProxy {
 	 * O usuário quando chama esse método ainda não iniciou uma partida, mas solicitou seu inicio.
 	 */
     //FAZ O REQUERIMENTO PARA INICIAR
-	protected void iniciarPartidaRede() {
-		try {
+	protected void iniciarPartidaRede(IniciarPartidaUI janelaUI) {
+//		controlador.iniciarPartidaRede(1);//PUS AQUI PUS AQUI
+                this.jframeInicio = janelaUI;
+                try {
 			Proxy.getInstance().iniciarPartida(2);
+                        jframeInicio.setVisible(true);
+                        
 		} catch (NaoConectadoException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage());
@@ -89,15 +109,31 @@ public class ControladorRede implements OuvidorProxy {
                     
                     case 1:
                         //jogador em ataque
+                        
                         ehJogoRede = true;
+                        System.out.println("case 1 no m�todo iniciarNovaPartida() - ControladorRede");
+                        controlador.iniciarPartidaRede(1);
+                        
+                        jframeInicio.dispose();
+//                        new JanelaAtaqueUI().setVisible(true);
+                        
                     break;
                     case 2:
                         //jogador em defesa
+                        
                         ehJogoRede = true;
+                        System.out.println("case 2 no m�todo iniciarNovaPartida() - ControladorRede");
+                        controlador.iniciarPartidaRede(2);
+                        
+                        jframeInicio.dispose();
+//                        new JanelaDefesaUI().setVisible(true);
                     break;
                     case 3:
                         //jogador em espera
                         ehJogoRede = true;
+                    break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Erro no m�todo iniciarNovaPartida() - Controlador");
                     break;
                     
                     
@@ -112,9 +148,9 @@ public class ControladorRede implements OuvidorProxy {
 	 * @param linha
 	 * @param coluna
 	 */
-        public void enviarJogadaRede(int linha, int coluna) {
+        public void enviarJogadaRede(Lance jogada) {
             if (ehJogoRede) {
-                Jogada jogada = new Lance();
+//                Jogada jogada = new Lance(numDeclarado, numAtual, bit, aceita);
 		try {
                     Proxy.getInstance().enviaJogada(jogada);
 //                    ehMinhaVez = false;
@@ -138,7 +174,7 @@ public class ControladorRede implements OuvidorProxy {
 	public void receberJogada(Jogada jogada) {
 		// Recebe uma jogada do outro lado
 		Lance lance = (Lance) jogada;
-		controlador.efetuarJogadaRede(jogada);
+		controlador.receberJogadaRede(jogada);
 		ehMinhaVez = true;
 
 	}
@@ -231,6 +267,29 @@ public class ControladorRede implements OuvidorProxy {
             
             JOptionPane.showMessageDialog(null,
 		"A partida não pode ser iniciada devido ao seguinte erro: "+ message);
+            
+        }
+        
+        
+        
+        public void lancarIniciarPartidaUI(Controlador controlador, ControladorRede rede){
+            this.controlador= controlador;
+            this.rede = rede;
+            jframeInicio = new IniciarPartidaUI(rede);
+            jframeInicio.setVisible(true);
+        }
+        
+        public List<String> getNomeAdversario(){
+            
+            return proxy.obterNomeAdversarios();
+//            return Proxy.getInstance().obterNomeAdversario(0);
+            
+            
+        }
+        
+        public String getNomePlayer(){
+            return proxy.getNomeJogador();
+//            return Proxy.getInstance().getNomeJogador();
             
         }
 

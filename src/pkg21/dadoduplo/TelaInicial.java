@@ -22,6 +22,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial(ControladorRede rede) {
         this.rede = rede;
         initComponents();
+//        new TelaInicial();
         
     }
     
@@ -69,7 +70,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLabel1.setText("Digite seu nome:");
 
-        jLabel2.setText("Digite o IP para conex√£o");
+        jLabel2.setText("Digite o IP para conex„o");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,10 +88,10 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
@@ -136,7 +137,16 @@ public class TelaInicial extends javax.swing.JFrame {
 
             return;
         }
+        
+//        try{
+//        
         rede.conectarRede(nome, ipServidor);
+        new IniciarPartidaUI(rede).setVisible(true);
+//            rede.lancarIniciarPartidaUI(rede.getControlador(), rede);
+        this.dispose();
+//        }catch(Exception e){
+//            System.out.print("deu merda classe TelaInicial");
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

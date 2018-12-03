@@ -15,11 +15,14 @@ public class Player {
         protected String nome;
 	protected int posicao;
 	protected int estado;
-	protected int pontuaçao;   
+	protected int pontuacao;   
 	protected int numAtual;
         
-        public Player(String nome){
+        public Player(String nome, int posicao){
             this.setNome(nome);
+            this.setPosicao(posicao);
+            pontuacao = 0;
+            System.out.println("Chegou m�todo construtor da classe Player");
         }
         
         public Player(){
@@ -97,12 +100,12 @@ public class Player {
         this.estado = estado;
     }
 
-    public int getPontuaçao() {
-        return pontuaçao;
+    public int getPontuacao() {
+        return pontuacao;
     }
 
-    public void setPontuaçao(int pontuaçao) {
-        this.pontuaçao = pontuaçao;
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
 
     public int getNumAtual() {

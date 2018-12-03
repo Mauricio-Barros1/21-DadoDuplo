@@ -5,17 +5,32 @@
  */
 package pkg21.dadoduplo;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author user
  */
 public class JanelaDefesaUI extends javax.swing.JFrame {
 
+    private Player player;
+    private Controlador controlador;
+    private int numDito;
+    private int numReal;
+    private int numAtual;
+    
     /**
      * Creates new form JanelaDefesaUI
      */
     public JanelaDefesaUI() {
         initComponents();
+    }
+    
+    public JanelaDefesaUI(Controlador controlador){
+        initComponents();
+        
+        this.controlador = controlador;
+        
     }
 
     /**
@@ -36,20 +51,18 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("PontuaÃ§Ã£o:");
+        jLabel1.setText("Pontuação:");
 
-        jLabel2.setText("pts");
+        jLabel2.setText("0");
 
-        jLabel3.setText("NÃºmero Anterior");
+        jLabel3.setText("Número Atual:");
 
-        jLabel4.setText("num");
-
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setText("jLabel5");
+        jLabel4.setText("0");
 
         jButton1.setText("Aceitar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,8 +72,17 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Recusar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setText("NÃºmero declarado pelo oponente:");
+        jLabel7.setText("Número declarado pelo oponente:");
+
+        jLabel8.setText("Nome:");
+
+        jLabel9.setText("Posição");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,34 +90,35 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(54, 54, 54))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(78, 78, 78))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addContainerGap()))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(60, 60, 60))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(49, 49, 49))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,25 +126,30 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
 
@@ -129,8 +157,12 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        controlador.enviarDefesa(new Lance (this.numDito, controlador.getNumAtual(), numReal , 0, true));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        controlador.enviarDefesa(new Lance(this.numDito, controlador.getNumAtual(), numReal, 0, false));
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +198,171 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void setPlayer(Player player){
+        this.player = player;
+        jLabel8.setText("Nome: " + player.getNome());
+        jLabel9.setText("PosiÃ§Ã£o: Defesa" );
+    }
+    
+    public Player getPlayer(){
+        return this.player;
+    }
+    
+    public void setPlacar(int placar){
+        jLabel2.setText("" + placar);
+    }
+    
+    public void setNumAtual(int num){
+        this.numAtual = num;
+        jLabel4.setText("" + num);
+        
+    }
+    
+    public void setTela(int numDeclarado) {
+        
+        switch(numDeclarado){
+            //31
+            case 1:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+            break;
+            //32
+            case 2:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+            break;
+            //41
+            case 3:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+            break;
+            //42
+            case 4:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+            break;
+            //43
+            case 5:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+            break;
+            //51
+            case 6:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+            break;
+            //52
+            case 7:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+            break;
+            //53
+            case 8:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+            break;
+            //54
+            case 9:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+            break;
+            //61
+            case 10:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+            break;
+            //62
+            case 11:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+            break;
+            //63
+            case 12:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+            break;
+            //64
+            case 13:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+            break;
+            //65
+            case 14:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+            break;
+            //11
+            case 15:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+            break;
+            //22
+            case 16:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+            break;
+            //33
+            case 17:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/3.png")));
+            break;
+            //44
+            case 18:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/4.jpg")));
+            break;
+            //55
+            case 19:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/5.jpg")));
+            break;
+            //66
+            case 20:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/6.png")));
+            break;
+            //21
+            case 21:
+                jLabel5.setIcon(new ImageIcon(getClass().getResource("/imagensdados/2.jpg")));
+                jLabel6.setIcon(new ImageIcon(getClass().getResource("/imagensdados/1.png")));
+            break;
+            
+            
+        }
+        
+        
+        
+        
+        pack();
+        repaint();
+            
+            
+            
+            
+    }
+
+    public int getNumDito() {
+        return numDito;
+    }
+
+    public void setNumDito(int numDito) {
+        this.numDito = numDito;
+    }
+
+    public int getNumReal() {
+        return numReal;
+    }
+
+    public void setNumReal(int numReal) {
+        this.numReal = numReal;
+    }
+    
+    
+
+        
+        
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -177,5 +374,7 @@ public class JanelaDefesaUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
